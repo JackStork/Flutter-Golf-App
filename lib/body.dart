@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'holeInfo.dart';
 import 'parSelection.dart';
@@ -41,52 +42,50 @@ class _BodyState extends State<Body> {
             child: new GridView.count(
               crossAxisCount: 2,
               children: List.generate(
-                holes.holeCount + 1,
+                holes.holeCount,
                 (index) {
-                  if (index < holes.holeCount) {
-                    return Card(
-                      child: Column(
-                        children: <Widget>[
-                          Expanded(
-                            child: ListTile(
-                              title: Text("Hole ${index + 1}",
-                                  style: TextStyle(fontSize: 22)),
-                            ),
-                          ),
-                          Card(
-                            elevation: 10,
-                            child: InkWell(
-                              onTap: () {
-                                updatePar(holes, index);
-                              },
-                              child: ListTile(
-                                title: Text("Par: ${holes.par[index]}"),
-                              ),
-                            ),
-                          ),
-                          Card(
-                            elevation: 10,
-                            child: InkWell(
-                              onTap: () {
-                                updateScore(holes, index);
-                              },
-                              child: ListTile(
-                                title: Text("Score: ${holes.score[index]}"),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  }
                   return Card(
-                    child:
-                        Text("Score: ${holes.score.reduce((a, b) => a + b)}"),
+                    child: Column(
+                      children: <Widget>[
+                        Expanded(
+                          child: ListTile(
+                            title: Text("Hole ${index + 1}",
+                                style: TextStyle(fontSize: 22)),
+                          ),
+                        ),
+                        Card(
+                          elevation: 10,
+                          child: InkWell(
+                            onTap: () {
+                              updatePar(holes, index);
+                            },
+                            child: ListTile(
+                              title: Text("Par: ${holes.par[index]}"),
+                            ),
+                          ),
+                        ),
+                        Card(
+                          elevation: 10,
+                          child: InkWell(
+                            onTap: () {
+                              updateScore(holes, index);
+                            },
+                            child: ListTile(
+                              title: Text("Score: ${holes.score[index]}"),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   );
                 },
               ),
             ),
           ),
+        ),
+        ElevatedButton(
+          child: Text("Round Information"),
+          onPressed: () {},
         )
       ],
     );
