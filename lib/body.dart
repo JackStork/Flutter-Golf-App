@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'holeInfo.dart';
 import 'parSelection.dart';
 import 'scoreSelection.dart';
+import 'popUpButton.dart';
 
 class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);
@@ -85,7 +86,11 @@ class _BodyState extends State<Body> {
         ),
         ElevatedButton(
           child: Text("Round Information"),
-          onPressed: () {},
+          onPressed: () {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) => popupInfo(holes));
+          },
         )
       ],
     );
