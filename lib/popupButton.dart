@@ -13,9 +13,32 @@ class popupInfo extends StatefulWidget {
 
 class _popupInfoState extends State<popupInfo> {
   @override
+  int par() {
+    return widget.holes.par.reduce((a, b) => a + b);
+  }
+
+  int score() {
+    return widget.holes.score.reduce((a, b) => a + b);
+  }
+
+  String overUnder() {
+    return (score() - par()).toString();
+  }
+
   Widget build(BuildContext context) {
     return new AlertDialog(
-      title: Text('${widget.holes.holeCount}'),
+      content: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text('Par: ${par()}'),
+            SizedBox(height: 20),
+            Text('Score: ${score()}'),
+            SizedBox(height: 20),
+            Text('Over / Under: ${overUnder()}'),
+          ],
+        ),
+      ),
     );
   }
 }
