@@ -84,14 +84,25 @@ class _BodyState extends State<Body> {
             ),
           ),
         ),
-        ElevatedButton(
-          child: Text("Round Information"),
-          onPressed: () {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) => popupInfo(holes));
-          },
-        )
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            ElevatedButton(
+              child: Text("Round Information "),
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) => popupInfo(holes));
+              },
+            ),
+            ElevatedButton(
+              child: Text("       Save Round       "),
+              onPressed: () {
+                return;
+              },
+            ),
+          ],
+        ),
       ],
     );
   }
