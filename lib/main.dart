@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:golf_app/savedRounds.dart';
 import 'body.dart';
 
 void main() {
@@ -14,15 +15,14 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
       home: Scaffold(
-        appBar: AppBar(
-          title: Container(
-            width: 40,
-            child: Image.asset('assets/golfball.png'),
+          appBar: AppBar(
+            title: Container(
+              width: 40,
+              child: Image.asset('assets/golfball.png'),
+            ),
+            centerTitle: true,
           ),
-          centerTitle: true,
-        ),
-        body: Body(),
-      ),
+          body: savedRounds()),
     );
   }
 }

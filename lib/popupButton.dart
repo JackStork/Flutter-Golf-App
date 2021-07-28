@@ -12,7 +12,6 @@ class popupInfo extends StatefulWidget {
 }
 
 class _popupInfoState extends State<popupInfo> {
-  @override
   int par() {
     return widget.holes.par.reduce((a, b) => a + b);
   }
@@ -25,6 +24,7 @@ class _popupInfoState extends State<popupInfo> {
     return (score() - par()).toString();
   }
 
+  @override
   Widget build(BuildContext context) {
     return new AlertDialog(
       content: SingleChildScrollView(
