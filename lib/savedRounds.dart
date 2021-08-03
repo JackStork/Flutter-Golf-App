@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'holeInfo.dart';
 import 'body.dart';
+import 'popupName.dart';
 
 class savedRounds extends StatefulWidget {
   const savedRounds({Key? key}) : super(key: key);
@@ -57,7 +58,13 @@ class _savedRoundsState extends State<savedRounds> {
                     onTap: () {
                       //Create a new holeInfo object every time 'new round' is pressed
                       var holes = new holeInfo();
-                      newRound(holes);
+                      //newRound(holes);
+
+                      //For the pop-up box for naming the round
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) =>
+                              popupName(saveRound, holes));
                     },
                     child: Center(
                       child: Text("New Round",
