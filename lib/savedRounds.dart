@@ -14,8 +14,12 @@ class _savedRoundsState extends State<savedRounds> {
 
   void saveRound(holeInfo myHole) {
     this.setState(() {
-      //Only add to list if it's a new round
-      roundList.add(myHole);
+      //Only add to list if it's a new round; dictated in body.dart
+      roundList.insert(0, myHole);
+      //Sort the list by date each time a new item is added (not necessary ATM, can just add item to front off saved list)
+      //roundList.sort((a, b) {
+      //  return b.date.compareTo(a.date);
+      //});
     });
   }
 
@@ -27,6 +31,15 @@ class _savedRoundsState extends State<savedRounds> {
                   builder: (context) => Body(saveRound, savedHole)))
           .then((value) => setState(() => {}));
     });
+  }
+
+  String getDate(holeInfo thisHole) {
+    String date = thisHole.date.month.toString() +
+        '/' +
+        thisHole.date.day.toString() +
+        '/' +
+        thisHole.date.year.toString();
+    return date;
   }
 
   @override
@@ -44,7 +57,6 @@ class _savedRoundsState extends State<savedRounds> {
                     onTap: () {
                       //Create a new holeInfo object every time 'new round' is pressed
                       var holes = new holeInfo();
-                      print('New Hole: ${holes.newRound}');
                       newRound(holes);
                     },
                     child: Center(
@@ -63,6 +75,7 @@ class _savedRoundsState extends State<savedRounds> {
           shrinkWrap: true,
           itemCount: roundList.length,
           itemBuilder: (context, index) {
+            holeInfo thisHole = roundList[index];
             return Row(
               children: <Widget>[
                 Expanded(
@@ -71,19 +84,33 @@ class _savedRoundsState extends State<savedRounds> {
                     child: Card(
                       elevation: 80,
                       child: InkWell(
-                          onTap: () {
-                            print('Saved Hole: ${roundList[index].newRound}');
-                            newRound(roundList[index]);
-                          },
-                          child: Center(
-                            child: Text(
-                              'Par: ${roundList[index].par.reduce((a, b) => (a + b))}, Score: ${roundList[index].score.reduce((a, b) => a + b)}',
-                              textAlign: TextAlign.center,
+                        onTap: () {
+                          newRound(roundList[index]);
+                        },
+                        child: Column(
+                          children: <Widget>[
+                            Expanded(
+                              child: Center(
+                                child: Text(
+                                  thisHole.roundName,
+                                  style: TextStyle(
+                                    fontSize: 22,
+                                  ),
+                                ),
+                              ),
                             ),
-                          )),
+                            Center(
+                              child: Text(
+                                'Par: ${thisHole.par.reduce((a, b) => (a + b))}, Score: ${thisHole.score.reduce((a, b) => a + b)}, Date Created: ${getDate(thisHole)}',
+                                textAlign: TextAlign.center,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
                     ),
                   ),
-                )
+                ),
               ],
             );
           },
